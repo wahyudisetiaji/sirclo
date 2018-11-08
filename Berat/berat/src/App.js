@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './containers/Home'
 import Create from './containers/Create'
+import Update from './containers/Update'
+import Show from './containers/Show'
 import NavBar from './components/NavBar'
 
 class App extends Component {
@@ -14,6 +16,8 @@ class App extends Component {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/create" component={Create} />
+                <Route path="/detail/:id" component={Show} />
+                <Route path="/update/:id" component={Update} />
             </Switch>
         </div>
       </Router>
