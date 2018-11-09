@@ -16,21 +16,12 @@ class FormCreate extends React.Component {
             isLoaded: false
         }
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.createBerat = this.createBerat.bind(this)
     }
 
     handleChange(event) {
         this.setState({
             [event.target.name] : event.target.value
-        })
-    }
-
-    handleSubmit() {
-        this.setState({
-            tanggal: '',
-            max: 0,
-            min: 0
         })
     }
 
@@ -67,11 +58,11 @@ class FormCreate extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label for="exampleMax">Max</Label>
-          <Input type="text" name="max" id="exampleMin" value={this.state.max} placeholder="Max" onChange={this.handleChange}/>
+          <Input type="number" name="max" id="exampleMin" value={this.state.max} placeholder="Max" onChange={this.handleChange}/>
         </FormGroup>
         <FormGroup>
           <Label for="exampleMax">Min</Label>
-          <Input type="text" name="min" id="exampleMin" value={this.state.min} placeholder="Min" onChange={this.handleChange}/>
+          <Input type="number" name="min" id="exampleMin" value={this.state.min} placeholder="Min" onChange={this.handleChange}/>
         </FormGroup>
         <Button>Submit</Button> <Link to="/"><Button>Back</Button></Link>
       </Form>

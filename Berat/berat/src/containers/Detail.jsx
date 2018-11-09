@@ -13,7 +13,7 @@ class Home extends Component {
     render() {
         return (
         <div className="container">
-            <DetailBerat data={this.props.dataOneBerat}></DetailBerat>
+            <DetailBerat></DetailBerat>
         </div>
         )
     }

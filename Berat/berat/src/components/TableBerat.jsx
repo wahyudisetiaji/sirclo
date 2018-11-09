@@ -31,16 +31,16 @@ class TableBerat extends React.Component {
 
    total = () => {
 
-        this.props.data.forEach(element => {
-            this.state.Max += Number(element.max)
-            this.state.Min += Number(element.min)
-            this.state.Perbedaan += Number(element.perbedaan)
-        });
+        // this.props.data.forEach(element => {
+        //     this.state.Max += Number(element.max)
+        //     this.state.Min += Number(element.min)
+        //     this.state.Perbedaan += Number(element.perbedaan)
+        // });
         
    }
 
   render() {
-    this.total()
+    // this.total()
     return (
         
         <div className = "container">
@@ -55,28 +55,27 @@ class TableBerat extends React.Component {
                 </tr>
             </thead>
                 {
-                    this.props.data.length === 0 ? <img src="http://www.andrew.cmu.edu/user/okarabas/w/wp-content/plugins/wp-1-slider/images/loader/loading2.gif" className="App-logo" alt="loading" />:  
-                    (this.props.data.map((berat, index) => (
+                    this.props.data.map((berat, index) => (
                         <tbody key = {berat._id}>
                             <tr>
                             <td>{berat.tanggal}</td>
                             <td>{berat.max}</td>
                             <td>{berat.min}</td>
                             <td>{berat.max - berat.min}</td>
-                            <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to="/update/1"><Button>Update</Button></Link> <Button onClick={ () => this.deleteBerat(berat._id)}>Delete</Button> </td>
+                            <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to={'/update/'+ berat._id}><Button>Update</Button></Link> <Button onClick={ () => this.deleteBerat(berat._id)}>Delete</Button> </td>
                             </tr>
                         </tbody>
                         
-                    )))
+                    ))
                 }
-             <tbody>
+             {/* <tbody>
                 <tr>
                 <td>Rata-Rata</td>
                 <td>{(this.state.Max / this.props.data.length).toFixed(1)}</td>
                 <td>{(this.state.Min / this.props.data.length).toFixed(1)}</td>
                 <td>{(this.state.Perbedaan / this.props.data.length).toFixed(1)}</td>
                 </tr>
-            </tbody>
+            </tbody> */}
          </Table>  
         </div>
     );
