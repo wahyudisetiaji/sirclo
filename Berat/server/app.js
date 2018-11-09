@@ -7,7 +7,9 @@ var cors = require('cors');
 
 var mongoose = require('mongoose');
 var db = mongoose.connection;
-mongoose.connect(`mongodb://sirclo:sirclo17@ds155213.mlab.com:55213/sirclo`, { useNewUrlParser: true });
+var url = `mongodb://localhost:27017/sirclo`
+// var url = `mongodb://sirclo:sirclo17@ds155213.mlab.com:55213/sirclo`
+mongoose.connect(url, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('we are connected mlab!');
