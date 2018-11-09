@@ -20,7 +20,7 @@ class DetailTable extends React.Component {
             <td>{this.props.dataOneBerat.tanggal}</td>
             <td>{this.props.dataOneBerat.max}</td>
             <td>{this.props.dataOneBerat.min}</td>
-            <td>{this.props.dataOneBerat.perbedaan}</td>
+            <td>{this.props.dataOneBerat.max - this.props.dataOneBerat.min}</td>
           </tr>
         </tbody>
         <Link to="/"><Button>Back</Button></Link>

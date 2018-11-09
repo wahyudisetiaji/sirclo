@@ -29,18 +29,7 @@ class TableBerat extends React.Component {
         });
     }
 
-   total = () => {
-
-        // this.props.data.forEach(element => {
-        //     this.state.Max += Number(element.max)
-        //     this.state.Min += Number(element.min)
-        //     this.state.Perbedaan += Number(element.perbedaan)
-        // });
-        
-   }
-
   render() {
-    // this.total()
     return (
         
         <div className = "container">
