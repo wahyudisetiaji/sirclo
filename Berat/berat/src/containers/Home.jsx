@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect }from 'react-redux'
-import TableBerat from '../components/TableBerat'
 import { getAllBerat } from '../store/actions/getAllBerat'
+import TableBerat from '../components/TableBerat'
 class Home extends Component {
 
     componentDidMount () {

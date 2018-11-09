@@ -63,7 +63,7 @@ class TableBerat extends React.Component {
                             <td>{berat.max}</td>
                             <td>{berat.min}</td>
                             <td>{berat.max - berat.min}</td>
-                            <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to="/update/1"><Button>Update</Button></Link> <Button onClick={ () =>this.deleteBerat(berat._id)}>Delete</Button> </td>
+                            <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to="/update/1"><Button>Update</Button></Link> <Button onClick={ () => this.deleteBerat(berat._id)}>Delete</Button> </td>
                             </tr>
                         </tbody>
                         
