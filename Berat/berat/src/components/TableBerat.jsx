@@ -1,8 +1,10 @@
 import React from 'react';
 import { Table, Button } from 'reactstrap';
 import { Link } from "react-router-dom";
-
-export default class Example extends React.Component {
+import axios from 'axios'
+import { connect }from 'react-redux'
+import { getAllBerat } from '../store/actions/getAllBerat'
+class TableBerat extends React.Component {
 
     constructor(props){
         super(props)
@@ -12,6 +14,19 @@ export default class Example extends React.Component {
             Perbedaan: 0,
             isLoaded: false
         }
+    }
+
+    deleteBerat = (id) => {
+        axios({
+            method: 'DELETE',
+            url: `http://localhost:4000/berat/delete/${id}`
+        })
+        .then((result) => {
+            this.props.getAllData()
+        })
+        .catch((err) => {
+            console.log(err)
+        });
     }
 
    total = () => {
@@ -48,7 +63,7 @@ export default class Example extends React.Component {
                             <td>{berat.max}</td>
                             <td>{berat.min}</td>
                             <td>{berat.max - berat.min}</td>
-                            <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to="/update/1"><Button>Update</Button></Link> <Button>Delete</Button> </td>
+                            <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to="/update/1"><Button>Update</Button></Link> <Button onClick={ () =>this.deleteBerat(berat._id)}>Delete</Button> </td>
                             </tr>
                         </tbody>
                         
@@ -67,3 +82,11 @@ export default class Example extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getAllData: () => dispatch(getAllBerat()),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(TableBerat)

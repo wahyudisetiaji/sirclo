@@ -6,7 +6,7 @@ class Home extends Component {
 
     componentDidMount () {
         this.props.getAllData()
-     }
+    }
 
     render() {
         return (
