@@ -10,12 +10,14 @@
 
 import getAllBerat from '../store/reducers/getAllBerat'
 import getOneBerat from '../store/reducers/getOneBerat'
+import getTotal from '../store/reducers/getTotal'
 import thunk from 'redux-thunk'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 const rootReducers = combineReducers ({
     getAllBerat,
-    getOneBerat
+    getOneBerat,
+    getTotal
 })
 
 const store = createStore(rootReducers, applyMiddleware(thunk)

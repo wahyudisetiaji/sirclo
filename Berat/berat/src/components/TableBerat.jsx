@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from 'axios'
 import { connect }from 'react-redux'
 import { getAllBerat } from '../store/actions/getAllBerat'
+import { getTotal } from '../store/actions/getTotal'
+
 class TableBerat extends React.Component {
 
     constructor(props){
@@ -23,6 +25,7 @@ class TableBerat extends React.Component {
         })
         .then((result) => {
             this.props.getAllData()
+            this.props.getTotalData()
         })
         .catch((err) => {
             console.log(err)
@@ -50,21 +53,22 @@ class TableBerat extends React.Component {
                             <td>{berat.tanggal}</td>
                             <td>{berat.max}</td>
                             <td>{berat.min}</td>
-                            <td>{berat.max - berat.min}</td>
+                            <td>{Number(berat.max) - Number(berat.min)}</td>
                             <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to={'/update/'+ berat._id}><Button>Update</Button></Link> <Button onClick={ () => this.deleteBerat(berat._id)}>Delete</Button> </td>
                             </tr>
                         </tbody>
                         
                     ))
                 }
-             {/* <tbody>
+             <tbody>
                 <tr>
                 <td>Rata-Rata</td>
-                <td>{(this.state.Max / this.props.data.length).toFixed(1)}</td>
-                <td>{(this.state.Min / this.props.data.length).toFixed(1)}</td>
-                <td>{(this.state.Perbedaan / this.props.data.length).toFixed(1)}</td>
+                <td>{(this.props.total.max / this.props.total.dataLength).toFixed(1)}</td>
+                <td>{(this.props.total.min / this.props.total.dataLength).toFixed(1)}</td>
+                <td>{(this.props.total.perbedaan / this.props.total.dataLength).toFixed(1)}</td>
                 </tr>
-            </tbody> */}
+            </tbody>
+            {/* <h1>{JSON.stringify(this.props.total)}</h1> */}
          </Table>  
         </div>
     );
@@ -74,6 +78,7 @@ class TableBerat extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getAllData: () => dispatch(getAllBerat()),
+        getTotalData: () => dispatch(getTotal())
     };
 };
 
