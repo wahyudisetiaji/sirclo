@@ -1,15 +1,35 @@
 import React, { Component } from 'react'
+import { connect }from 'react-redux'
 import TableBerat from '../components/TableBerat'
+import { getAllBerat } from '../store/actions/getAllBerat'
 class Home extends Component {
-  render() {
-    return (
-      <div className="container">
-        <h3>Table Berat</h3>
-        <TableBerat></TableBerat>
-      </div>
-    )
-  }
+
+    componentDidMount () {
+        this.props.getAllData()
+     }
+
+    render() {
+        return (
+        <div className="container">
+            <h3>Table Berat</h3>
+            <TableBerat data={this.props.dataBerat}></TableBerat>
+        </div>
+        )
+    }
 }
 
-export default Home
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoading: state.getAllBerat.isLoading,
+        dataBerat: state.getAllBerat.data
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getAllData: () => dispatch(getAllBerat()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
 

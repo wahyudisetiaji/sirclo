@@ -3,46 +3,67 @@ import { Table, Button } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 export default class Example extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            Max: 0,
+            Min: 0,
+            Perbedaan: 0,
+            isLoaded: false
+        }
+    }
+
+   total = () => {
+
+        this.props.data.forEach(element => {
+            this.state.Max += Number(element.max)
+            this.state.Min += Number(element.min)
+            this.state.Perbedaan += Number(element.perbedaan)
+        });
+        
+   }
+
   render() {
+    this.total()
     return (
-      <Table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Tanggal</th>
-            <th>Max</th>
-            <th>Min</th>
-            <th>Perbedaan</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>11/11/2018</td>
-            <td>31</td>
-            <td>30</td>
-            <td>1</td>
-            <td> <Link to="/detail/1"><Button>Show</Button></Link> <Link to="/update/1"><Button>Update</Button></Link> <Button>Delete</Button> </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>11/11/2018</td>
-            <td>32</td>
-            <td>30</td>
-            <td>2</td>
-            <td> <Link to="/detail/2"><Button>Show</Button></Link> <Link to="/update/2"><Button>Update</Button></Link> <Button>Delete</Button> </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>11/11/2018</td>
-            <td>32</td>
-            <td>30</td>
-            <td>3</td>
-            <td> <Link to="/detail/3"><Button>Show</Button></Link> <Link to="/update/2"><Button>Update</Button></Link> <Button>Delete</Button> </td>
-          </tr>
-        </tbody>
-      </Table>
+        
+        <div className = "container">
+            <Table>
+            <thead>
+                <tr>
+                <th>Tanggal</th>
+                <th>Max</th>
+                <th>Min</th>
+                <th>Perbedaan</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+                {
+                    this.props.data.length === 0 ? <img src="http://www.andrew.cmu.edu/user/okarabas/w/wp-content/plugins/wp-1-slider/images/loader/loading2.gif" className="App-logo" alt="loading" />:  
+                    (this.props.data.map((berat, index) => (
+                        <tbody key = {berat._id}>
+                            <tr>
+                            <td>{berat.tanggal}</td>
+                            <td>{berat.max}</td>
+                            <td>{berat.min}</td>
+                            <td>{berat.max - berat.min}</td>
+                            <td> <Link to={'/detail/'+ berat._id} data={berat}><Button>Show</Button></Link> <Link to="/update/1"><Button>Update</Button></Link> <Button>Delete</Button> </td>
+                            </tr>
+                        </tbody>
+                        
+                    )))
+                }
+             <tbody>
+                <tr>
+                <td>Rata-Rata</td>
+                <td>{(this.state.Max / this.props.data.length).toFixed(1)}</td>
+                <td>{(this.state.Min / this.props.data.length).toFixed(1)}</td>
+                <td>{(this.state.Perbedaan / this.props.data.length).toFixed(1)}</td>
+                </tr>
+            </tbody>
+         </Table>  
+        </div>
     );
   }
 }
