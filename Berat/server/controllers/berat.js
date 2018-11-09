@@ -4,7 +4,7 @@ module.exports = {
 
     findBerat: function (req, res) {
 
-        Berat.find({})
+        Berat.find({}).sort({tanggal: 'DESC'})
         .then((result) => {
 
             res.status(201).json({
@@ -46,13 +46,10 @@ module.exports = {
 
     createBerat: function (req, res) {
 
-        let result = req.body.max - req.body.min
-
         Berat.create({
             tanggal: req.body.tanggal,
             max: req.body.max,
-            min: req.body.min,
-            perbedaan: result.toFixed(1)
+            min: req.body.min
         })
         .then((result) => {
 
@@ -74,17 +71,20 @@ module.exports = {
 
     updateBerat: function (req, res) {
 
-        let result = req.body.max - req.body.min
+        let {tanggal, max, min} = req.body
+        let objBerat = {}
+
+        if (tanggal) objBerat.tanggal = tanggal
+        if (max) objBerat.max = max 
+        if (min) objBerat.min = min
+
+        let obj = objBerat
+        console.log(obj)
 
         Berat.updateOne(
             {_id: req.params.id},
             {
-                $set: {
-                    tanggal: req.body.tanggal,
-                    max: req.body.max,
-                    min: req.body.min,
-                    perbedaan: result.toFixed(1)
-                }
+                $set: obj
             }
         )
         .then((result) => {

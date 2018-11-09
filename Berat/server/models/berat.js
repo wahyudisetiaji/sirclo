@@ -6,15 +6,12 @@ const Schema = mongoose.Schema;
 
 var beratSchema = new Schema({
     tanggal: {
-        type: Date
+        type: String
     },
     max: {
         type: SchemaTypes.Double
     },
     min: {
-        type: SchemaTypes.Double
-    },
-    perbedaan: {
         type: SchemaTypes.Double
     }
 },{
